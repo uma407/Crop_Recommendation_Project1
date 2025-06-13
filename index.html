@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Recommendation System</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f8ff; }
+    h1 { color: #2e8b57; }
+    input, button { margin: 5px; padding: 8px; width: 200px; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Crop Recommendation System</h1>
+  <form id="cropForm">
+    <input type="number" placeholder="Nitrogen (N)" id="N" required><br>
+    <input type="number" placeholder="Phosphorus (P)" id="P" required><br>
+    <input type="number" placeholder="Potassium (K)" id="K" required><br>
+    <input type="number" placeholder="Temperature (°C)" id="temperature" step="any" required><br>
+    <input type="number" placeholder="Humidity (%)" id="humidity" step="any" required><br>
+    <input type="number" placeholder="pH" id="ph" step="any" required><br>
+    <input type="number" placeholder="Rainfall (mm)" id="rainfall" step="any" required><br>
+    <button type="submit">Recommend Crop</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById('cropForm');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = {
+        N: +document.getElementById('N').value,
+        P: +document.getElementById('P').value,
+        K: +document.getElementById('K').value,
+        temperature: +document.getElementById('temperature').value,
+        humidity: +document.getElementById('humidity').value,
+        ph: +document.getElementById('ph').value,
+        rainfall: +document.getElementById('rainfall').value
+      };
+
+      const res = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      document.getElementById("result").innerText =
+        result.recommended_crop ? `Recommended Crop: ${result.recommended_crop}` : `Error: ${result.error}`;
+    });
+  </script>
+</body>
+</html>
