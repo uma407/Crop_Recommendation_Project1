@@ -1,6 +1,10 @@
 # Crop Recommendation System
 
 This project predicts the most suitable crop to grow based on environmental conditions using a machine learning model trained on agricultural data.
+## 🚀 Run This Project in Google Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1eb_N2BUV_MRZ0VS7rCHYjLeuaxib8uDr?usp=sharing)
+https://colab.research.google.com/drive/1eb_N2BUV_MRZ0VS7rCHYjLeuaxib8uDr?usp=sharing
 
 ## 📁 Folder Structure
 
